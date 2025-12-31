@@ -24,27 +24,6 @@
 
 ---
 
-## 🗂 Структура проекта
-
-BlazorTest/
-│
-├─ Components/
-│ ├─ TaskItem.razor # Компонент отдельной задачи
-│ ├─ Layout/
-│ │ ├─ MainLayout.razor
-│ │ └─ (NavMenu — можно удалить)
-│ └─ Pages/
-│ └─ Tasks.razor # Главная страница с задачами
-│
-├─ Models/
-│ └─ TodoTask.cs # Модель задачи
-│
-├─ wwwroot/
-├─ Program.cs
-└─ BlazorTest.csproj
-
----
-
 ## 🚀 Запуск проекта
 
 Убедитесь, что установлен **.NET 8 SDK**:
