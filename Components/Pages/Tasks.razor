@@ -1,0 +1,61 @@
+@page "/"
+@rendermode InteractiveServer
+
+<h3>Менеджер задач</h3>
+
+<input placeholder="Новая задача"
+       @bind="newTask"
+       @bind:event="oninput" />
+
+<button @onclick="AddTask">Добавить</button>
+
+<ul>
+    @foreach (TaskItem task in tasks)
+    {
+        <li>
+            <input type="checkbox"
+                   checked="@task.IsCompleted"
+                   @onchange="() => Toggle(task)" />
+
+            <span style="margin-left:8px;
+                         text-decoration:@(task.IsCompleted ? "line-through" : "none")">
+                @task.Title
+            </span>
+
+            <button style="margin-left:10px"
+                    @onclick="() => Delete(task)">
+                Удалить
+            </button>
+        </li>
+    }
+</ul>
+
+@code {
+    class TaskItem
+    {
+        public string Title { get; set; } = "";
+        public bool IsCompleted { get; set; }
+    }
+
+    List<TaskItem> tasks = new List<TaskItem>();
+    string newTask = "";
+
+    void AddTask()
+    {
+        if (string.IsNullOrWhiteSpace(newTask))
+            return;
+
+        tasks.Add(new TaskItem { Title = newTask });
+        newTask = "";
+    }
+
+    void Toggle(TaskItem task)
+    {
+        task.IsCompleted = !task.IsCompleted;
+    }
+
+    void Delete(TaskItem task)
+    {
+        tasks.Remove(task);
+    }
+}

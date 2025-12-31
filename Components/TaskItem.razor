@@ -1,0 +1,20 @@
+@using TaskManager10.Models
+
+<li class="task-item @(Task.IsCompleted ? "done" : "")">
+    <input type="checkbox"
+           checked="@Task.IsCompleted"
+           @onchange="() => OnToggle.InvokeAsync(Task)" />
+
+    <span>@Task.Title</span>
+
+    <button class="delete"
+            @onclick="() => OnDelete.InvokeAsync(Task)">
+        ✕
+    </button>
+</li>
+
+@code {
+    [Parameter] public TodoTask Task { get; set; } = null!;
+    [Parameter] public EventCallback<TodoTask> OnToggle { get; set; }
+    [Parameter] public EventCallback<TodoTask> OnDelete { get; set; }
+}
